@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+export 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class McIcons {
   static const IconData ab_testing = IconData(983068,
