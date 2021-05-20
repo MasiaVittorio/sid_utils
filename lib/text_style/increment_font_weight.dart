@@ -14,7 +14,7 @@ extension FontWeightSidIncrement on FontWeight {
     FontWeight.w900: FontWeight.w900,
   };
 
-  FontWeight get increment => incrementMap[this];
+  FontWeight get increment => incrementMap[this]!;
 
   static const decrementMap = {
     FontWeight.w100: FontWeight.w100,
@@ -28,6 +28,6 @@ extension FontWeightSidIncrement on FontWeight {
     FontWeight.w900: FontWeight.w800,
   };
 
-  FontWeight get decrement => decrementMap[this];
+  FontWeight get decrement => decrementMap[this]!;
 
 }

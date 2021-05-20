@@ -1,34 +1,36 @@
 
 extension IterablePartition<T> on Iterable<T> {
-  Iterable<List<T>> part(int size) => partition(this, size);
+  Iterable<List<T>?> part(int size) => partition(this, size);
 }
 
 /// Partitions the input iterable into lists of the specified size.
-Iterable<List<T>> partition<T>(Iterable<T> iterable, int size) {
-  return iterable.isEmpty ? [] : new _Partition<T>(iterable, size);
+Iterable<List<T>?> partition<T>(Iterable<T> iterable, int size) {
+  return (iterable.isEmpty ? <List<T>>[] : _Partition<T>(iterable, size)) as Iterable<List<T>?>;
 }
 
-class _Partition<T> extends Iterable<List<T>> {
+class _Partition<T> extends Iterable<List<T>?> {
   final Iterable<T> _iterable;
   final int _size;
 
   _Partition(this._iterable, this._size) {
-    if (_size <= 0) throw new ArgumentError(_size);
+    if (_size <= 0) throw ArgumentError(_size);
   }
 
-  Iterator<List<T>> get iterator =>
-      new _PartitionIterator<T>(_iterable.iterator, _size);
+  Iterator<List<T>?> get iterator => _PartitionIterator<T>(
+    _iterable.iterator, 
+    _size,
+  );
 }
 
-class _PartitionIterator<T> implements Iterator<List<T>> {
+class _PartitionIterator<T> implements Iterator<List<T>?> {
   final Iterator<T> _iterator;
   final int _size;
-  List<T> _current;
+  List<T>? _current;
 
   _PartitionIterator(this._iterator, this._size);
 
   @override
-  List<T> get current => _current;
+  List<T>? get current => _current;
 
   @override
   bool moveNext() {

@@ -20,9 +20,9 @@ extension ColorSid on Color {
 }
 
 extension BrightnessSid on Brightness {
-  String get name => _Brightness.names[this];
+  String get name => _Brightness.names[this]!;
 
-  IconData get icon => _Brightness.icons[this];
+  IconData get icon => _Brightness.icons[this]!;
 
   Color get contrast => this.isLight ? Colors.black : Colors.white;
 

@@ -6,7 +6,7 @@ extension ListSidSeparate<T> on List<T> {
     bool alsoLast = false,
     bool alsoFirstAndLast = false,
   }) => <T>[
-    if((alsoFirst ?? false) || (alsoFirstAndLast ?? false))
+    if(alsoFirst || alsoFirstAndLast)
       splitter,
     if(this.isNotEmpty) 
       this.first,
@@ -15,7 +15,7 @@ extension ListSidSeparate<T> on List<T> {
         splitter, 
         this[i]
       ],
-    if((alsoLast ?? false) || (alsoFirstAndLast ?? false))
+    if(alsoLast || alsoFirstAndLast)
       splitter,
   ];
 
@@ -24,7 +24,7 @@ extension ListSidSeparate<T> on List<T> {
     bool alsoLast = false,
     bool alsoFirstAndLast = false,
   }) => <T>[
-    if((alsoFirst ?? false) || (alsoFirstAndLast ?? false))
+    if(alsoFirst || alsoFirstAndLast)
       ...splitters,
     if(this.isNotEmpty) 
       this.first,
@@ -33,7 +33,7 @@ extension ListSidSeparate<T> on List<T> {
         ...splitters, 
         this[i]
       ],
-    if((alsoLast ?? false) || (alsoFirstAndLast ?? false))
+    if(alsoLast || alsoFirstAndLast)
       ...splitters,
   ];
 

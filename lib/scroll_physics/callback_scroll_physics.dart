@@ -53,7 +53,7 @@ class SidereusScrollPhysics extends ScrollPhysics {
 
   /// {OC} Creates scroll physics that can bounce back from the edge and trigger callbacks.
   const SidereusScrollPhysics({ 
-    ScrollPhysics parent, 
+    ScrollPhysics? parent, 
     this.topBounce, 
     this.callbackCondition,
     this.bottomBounce,
@@ -65,33 +65,33 @@ class SidereusScrollPhysics extends ScrollPhysics {
 
   /// {OC} you can customize the behavior of the scrollable object to 
   /// always accept scroll gestures by setting [alwaysScrollable] to true
-  final bool alwaysScrollable;
+  final bool? alwaysScrollable;
   /// {OC} you can customize the behavior of the scrollable object to 
   /// never accept scroll gestures by setting [neverScrollable] to true
-  final bool neverScrollable;
+  final bool? neverScrollable;
 
   /// {OC} if true, the top part of the scrollable object will behave like it was on iOS
   /// (as with [BouncingScrollPhysics]), else it will behave like [ClampingScrollPhysics]
-  final bool topBounce;
+  final bool? topBounce;
 
   /// {OC} if true, the bottom part of the scrollable object will behave like it was on iOS
   /// (as with [BouncingScrollPhysics]), else it will behave like [ClampingScrollPhysics]
-  final bool bottomBounce;
+  final bool? bottomBounce;
 
   /// {OC} if non null, any bouncing part of the scrollable object will be able to trigger a callback
   /// when the user overscrolls (or underscrolls) in a way that makes this function return true
-  final bool Function(double over, double velocity) callbackCondition;
+  final bool Function(double over, double velocity)? callbackCondition;
 
   /// {OC} if [topBounce] is true and [callbackThreshold] is non null, the user will trigger 
   /// this callback by underscrolling the object over the top by a given amount of pixels 
-  final void Function() topBounceCallback;
+  final void Function()? topBounceCallback;
 
   /// {OC} if [topBounce] is true and [callbackThreshold] is non null, the user will trigger 
   /// this callback by overscrolling the object over the bottom by a given amount of pixels
-  final void Function() bottomBounceCallback;
+  final void Function()? bottomBounceCallback;
 
   @override
-  SidereusScrollPhysics applyTo(ScrollPhysics ancestor) {
+  SidereusScrollPhysics applyTo(ScrollPhysics? ancestor) {
     return SidereusScrollPhysics(
       parent: buildParent(ancestor), 
       alwaysScrollable: this.alwaysScrollable,
@@ -186,7 +186,7 @@ class SidereusScrollPhysics extends ScrollPhysics {
   }
 
   @override
-  Simulation createBallisticSimulation(ScrollMetrics position, double velocity) {
+  Simulation? createBallisticSimulation(ScrollMetrics position, double velocity) {
     final Tolerance tolerance = this.tolerance;
     if (
       ( velocity.abs() >= tolerance.velocity && 
@@ -208,7 +208,7 @@ class SidereusScrollPhysics extends ScrollPhysics {
         if(this.bottomBounce == true) _overscroll = true;
       }
 
-      bool Function (double, double) conditionChecker;
+      bool Function (double, double)? conditionChecker;
       if(this.callbackCondition != null)
         conditionChecker = this.callbackCondition;
       else 
@@ -219,10 +219,10 @@ class SidereusScrollPhysics extends ScrollPhysics {
         bool checked = conditionChecker(_dist, velocity.abs()); 
         if(checked){
           if(_overscroll && this.bottomBounceCallback != null && velocity >= 0){
-            this.bottomBounceCallback();
+            this.bottomBounceCallback!();
           }
           if(_underscroll && this.topBounceCallback != null && velocity <= 0){
-            this.topBounceCallback();
+            this.topBounceCallback!();
           }
         }
       }
@@ -288,7 +288,7 @@ class SidereusScrollPhysics extends ScrollPhysics {
     if(this.neverScrollable ==  true) return false;
     if (parent == null)
       return position.pixels != 0.0 || position.minScrollExtent != position.maxScrollExtent;
-    return parent.shouldAcceptUserOffset(position);
+    return parent!.shouldAcceptUserOffset(position);
   }
 
 

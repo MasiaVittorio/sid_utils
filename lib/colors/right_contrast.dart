@@ -1,87 +1,92 @@
 import 'package:flutter/material.dart';
+import 'themes_and_colors.dart';
 
 class RightContrast {
+
   final ThemeData theme;
   final bool fallbackOnTextTheme;
   final bool fallbackOnIconTheme;
+
   const RightContrast(this.theme, {
     this.fallbackOnIconTheme = false,
     this.fallbackOnTextTheme = false,
-  }): assert(!fallbackOnIconTheme || !fallbackOnTextTheme);
+  }): assert(!(fallbackOnIconTheme && fallbackOnTextTheme));
 
   Color get onCanvas {
-    final accent = theme.accentColor;
-    final primary = theme.primaryColor;
-
-    final accentDark = ThemeData.estimateBrightnessForColor(accent) == Brightness.dark;
-    final primaryDark = ThemeData.estimateBrightnessForColor(primary) == Brightness.dark;
-    final canvasDark = ThemeData.estimateBrightnessForColor(theme.canvasColor) == Brightness.dark;
+    final Color accent = theme.accentColor;
+    final Color primary = theme.primaryColor;
+    final Color canvas = theme.canvasColor;
 
 
-    if(primaryDark != canvasDark)
+
+    if(primary.legibleOn(canvas))
       return primary;
-    else if(accentDark != canvasDark)
+    else if(accent.legibleOn(canvas))
       return accent;
 
-    if(fallbackOnIconTheme)
-      return theme.iconTheme.color;
-    if(fallbackOnTextTheme)
-      return theme.textTheme.bodyText2.color;
+    if(fallbackOnIconTheme){
+      Color? res = theme.iconTheme.color;
+      if(res != null) return res;
+    }
+      
+    if(fallbackOnTextTheme){
+      Color? res = theme.textTheme.bodyText2?.color;
+      if(res != null) return res;
+    }
 
-    return canvasDark ? Colors.white : Colors.black;
+    return canvas.contrast;
   }
 
   Color get onAccent {
-    final primary = theme.primaryColor;
-
-    final accentDark = ThemeData.estimateBrightnessForColor(theme.accentColor) == Brightness.dark;
-    final primaryDark = ThemeData.estimateBrightnessForColor(primary) == Brightness.dark;
+    final Color primary = theme.primaryColor;
+    final Color accent = theme.accentColor;
 
 
-    if(accentDark != primaryDark)
+    if(accent.legibleOn(primary))
       return primary;
 
-    if(fallbackOnIconTheme)
-      return theme.accentIconTheme.color;
-    if(fallbackOnTextTheme)
-      return theme.accentTextTheme.bodyText2.color;
+    if(fallbackOnIconTheme){
+      final Color? res = theme.accentIconTheme.color;
+      if(res != null) return res;
+    }
+    if(fallbackOnTextTheme){
+      final Color? res = theme.accentTextTheme.bodyText2?.color;
+      if(res != null) return res;
+    }
 
-    return accentDark ? Colors.white : Colors.black;
+    return accent.contrast;
   }
 
   Color get onPrimary {
-    final accent = theme.accentColor;
-
-    final accentDark = ThemeData.estimateBrightnessForColor(theme.primaryColor) == Brightness.dark;
-    final primaryDark = ThemeData.estimateBrightnessForColor(accent) == Brightness.dark;
+    final Color accent = theme.accentColor;
+    final Color primary = theme.primaryColor;
 
 
-    if(accentDark != primaryDark)
+    if(accent.legibleOn(primary))
       return accent;
 
-    if(fallbackOnIconTheme)
-      return theme.primaryIconTheme.color;
-    if(fallbackOnTextTheme)
-      return theme.primaryTextTheme.bodyText2.color;
+    if(fallbackOnIconTheme){
+      final Color? res = theme.primaryIconTheme.color;
+      if(res!=null) return res;
+    }
+    if(fallbackOnTextTheme){
+      final Color? res = theme.primaryTextTheme.bodyText2?.color;
+      if(res!=null) return res;
+    }
 
-    return primaryDark ? Colors.white : Colors.black;
+    return primary.contrast;
   }
 
   Color onColor(Color color) {
-    final accent = theme.accentColor;
-    final primary = theme.primaryColor;
+    final Color accent = theme.accentColor;
+    final Color primary = theme.primaryColor;
 
-    final accentDark = ThemeData.estimateBrightnessForColor(accent) == Brightness.dark;
-    final primaryDark = ThemeData.estimateBrightnessForColor(primary) == Brightness.dark;
-
-    final colorDark = ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
-
-    if(primaryDark != colorDark)
+    if(primary.legibleOn(color))
       return primary;
-    else if(accentDark != colorDark)
+    else if(accent.legibleOn(color))
       return accent;
 
-    return colorDark ? Colors.white : Colors.black;
+    return color.contrast;
   }
 
 }

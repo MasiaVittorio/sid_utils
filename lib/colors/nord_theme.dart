@@ -145,19 +145,19 @@ class NordTheme {
   );
 
 
-  static Color get _darkBackground => polarNight[0];
-  static Color get _darkBackgroundElevated => polarNight[1];
-  static Color get _darkBackgroundElevatedMore => polarNight[2];
+  static Color get _darkBackground => polarNight[0]!;
+  static Color get _darkBackgroundElevated => polarNight[1]!;
+  static Color get _darkBackgroundElevatedMore => polarNight[2]!;
 
   /// Bright to dark (recommended)
-  static Color get _lightBackground => snowStorm[6];
-  static Color get _lightBackgroundElevated => snowStorm[5];
-  static Color get _lightBackgroundElevatedMore => snowStorm[4];
+  static Color get _lightBackground => snowStorm[6]!;
+  static Color get _lightBackgroundElevated => snowStorm[5]!;
+  static Color get _lightBackgroundElevatedMore => snowStorm[4]!;
 
   /// Dark to bright (alternative)
-  static Color get _altLightBackground => snowStorm[4];
-  static Color get _altLightBackgroundElevated => snowStorm[5];
-  static Color get _altLightBackgroundElevatedMore => snowStorm[6];
+  static Color get _altLightBackground => snowStorm[4]!;
+  static Color get _altLightBackgroundElevated => snowStorm[5]!;
+  static Color get _altLightBackgroundElevatedMore => snowStorm[6]!;
 
 
   static Color background(Brightness brightness, {bool alternativeLightTheme = false}) 
@@ -167,15 +167,15 @@ class NordTheme {
   static Color backgroundElevatedMore(Brightness brightness, {bool alternativeLightTheme = false}) 
     => brightness == Brightness.dark ? _darkBackgroundElevatedMore : alternativeLightTheme ? _altLightBackgroundElevatedMore : _lightBackgroundElevatedMore;
 
-  static Color get _darkText => snowStorm[6];
-  static Color get _darkTextSubtle => snowStorm[5];
-  static Color get _darkTextSubtleMore => snowStorm[5];
-  static Color get _darkTextSubtleSuper => snowStorm[4];
+  static Color get _darkText => snowStorm[6]!;
+  static Color get _darkTextSubtle => snowStorm[5]!;
+  static Color get _darkTextSubtleMore => snowStorm[5]!;
+  static Color get _darkTextSubtleSuper => snowStorm[4]!;
 
-  static Color get _lightText => polarNight[0];
-  static Color get _lightTextSubtle => polarNight[1];
-  static Color get _lightTextSubtleMore => polarNight[2];
-  static Color get _lightTextSubtleSuper => polarNight[3];
+  static Color get _lightText => polarNight[0]!;
+  static Color get _lightTextSubtle => polarNight[1]!;
+  static Color get _lightTextSubtleMore => polarNight[2]!;
+  static Color get _lightTextSubtleSuper => polarNight[3]!;
 
   static Color text(Brightness brightness)
     => brightness == Brightness.dark ? _darkText : _lightText;
@@ -188,15 +188,15 @@ class NordTheme {
 
 
   static const Color accent = nord8; //frost / frost[8]
-  static Color get accent2 => frost[7];
-  static Color get accent3 => frost[9];
-  static Color get accent4 => frost[10];
+  static Color get accent2 => frost[7]!;
+  static Color get accent3 => frost[9]!;
+  static Color get accent4 => frost[10]!;
 
-  static Color get error => aurora[11]; //dark red
+  static Color get error => aurora[11]!; //dark red
   static Color get danger => aurora; //12 // red
-  static Color get warning => aurora[13]; // yellow
-  static Color get success => aurora[14]; // green
-  static Color get uncommon => aurora[15]; // grey-ish
+  static Color get warning => aurora[13]!; // yellow
+  static Color get success => aurora[14]!; // green
+  static Color get uncommon => aurora[15]!; // grey-ish
 
 }
 

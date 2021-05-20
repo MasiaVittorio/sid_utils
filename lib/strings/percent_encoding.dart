@@ -25,7 +25,7 @@ class PercentEncode {
     return char_map[char] ?? char;
   }
 
-  static String encodeString(String string){
+  static String encodeString(String? string){
     if(string == null) return '';
     if(string.length == 0) return string;
     String result = '';
