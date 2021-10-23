@@ -13,7 +13,7 @@ class RightContrast {
   }): assert(!(fallbackOnIconTheme && fallbackOnTextTheme));
 
   Color get onCanvas {
-    final Color accent = theme.accentColor;
+    final Color accent = theme.colorScheme.secondary;
     final Color primary = theme.primaryColor;
     final Color canvas = theme.canvasColor;
 
@@ -39,18 +39,14 @@ class RightContrast {
 
   Color get onAccent {
     final Color primary = theme.primaryColor;
-    final Color accent = theme.accentColor;
+    final Color accent = theme.colorScheme.secondary;
 
 
     if(accent.legibleOn(primary))
       return primary;
 
-    if(fallbackOnIconTheme){
-      final Color? res = theme.accentIconTheme.color;
-      if(res != null) return res;
-    }
-    if(fallbackOnTextTheme){
-      final Color? res = theme.accentTextTheme.bodyText2?.color;
+    if(fallbackOnIconTheme || fallbackOnTextTheme){
+      final Color? res = theme.colorScheme.onSecondary;
       if(res != null) return res;
     }
 
@@ -58,7 +54,7 @@ class RightContrast {
   }
 
   Color get onPrimary {
-    final Color accent = theme.accentColor;
+    final Color accent = theme.colorScheme.secondary;
     final Color primary = theme.primaryColor;
 
 
@@ -78,7 +74,7 @@ class RightContrast {
   }
 
   Color onColor(Color color) {
-    final Color accent = theme.accentColor;
+    final Color accent = theme.colorScheme.secondary;
     final Color primary = theme.primaryColor;
 
     if(primary.legibleOn(color))
