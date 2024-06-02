@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:flutter/gestures.dart';
 
-/// {OC} this class is made by barely taking some parts from [ClampingScrollPhysics] 
+/// {OC} this class is made by simply taking some parts from [ClampingScrollPhysics] 
 /// and [BouncingScrollPhysics] by the flutter material library and tweaking 
 /// it a bit to achieve new features. every comment that doesn't start with
 /// "{OC} " is barely a copy-paste from the material library
